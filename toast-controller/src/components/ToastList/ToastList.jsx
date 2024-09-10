@@ -2,17 +2,22 @@ import { useToast } from "../../contexts/toast.context";
 import Toast from "../Toast/Toast";
 
 function ToastList() {
-	const { toastList } = useToast();
+	const { toastList, removeToast } = useToast();
+
 	return (
 		<ul className="fixed bottom-5 right-5">
 			{toastList.map((toast, index) => {
+				if (toast.status === "over") {
+					removeToast(toast.id);
+					return null;
+				}
 				return (
 					<li
 						key={index}
-						className={`mt-5 transition-all duration-500 ${
+						className={`mt-5 transition-all duration-300  ${
 							toast.status === "start" || toast.status === "end"
 								? "translate-x-[430px]"
-								: "translate-x-0"
+								: "translate-x-0 "
 						}`}
 					>
 						<Toast
@@ -23,9 +28,6 @@ function ToastList() {
 					</li>
 				);
 			})}
-			{/* <li>
-				<Toast />
-			</li> */}
 		</ul>
 	);
 }

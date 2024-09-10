@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useToast } from "../../contexts/toast.context";
 
 function ToastForm() {
@@ -24,11 +23,10 @@ function ToastForm() {
 	const handleSubmitToastController = (event) => {
 		event.preventDefault();
 		const toast = {
-			id: uuidv4(),
 			title,
 			content,
 			showTime: Number(showTime),
-			status: "start",
+			status: "running",
 		};
 		processOnToast(toast);
 	};
